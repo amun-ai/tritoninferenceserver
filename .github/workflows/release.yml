@@ -1,9 +1,16 @@
-name: Build and Push Docker Image
+name: Manually Triggered Build and Push
 
 on:
-  push:
-    branches:
-      - main
+  workflow_dispatch:
+    inputs:
+      baseImage:
+        description: 'Base image (e.g., nvcr.io/nvidia/tritonserver)'
+        required: true
+        default: 'nvcr.io/nvidia/tritonserver'
+      baseTag:
+        description: 'Base image tag (e.g., 24.01-py3-igpu)'
+        required: true
+        default: '24.01-py3-igpu'
 
 jobs:
   build-and-push:
@@ -25,6 +32,7 @@ jobs:
           context: .
           file: ./Dockerfile
           push: true
-          tags: ghcr.io/${{ github.repository }}/tritonserver-custom:24.01-py3-igpu
-          build-args: BASE_IMAGE_TAG=nvcr.io/nvidia/tritonserver:24.01-py3-igpu
-
+          tags: ghcr.io/${{ github.repository }}/tritonserver-custom:${{ github.event.inputs.baseTag }}
+          build-args: |
+            BASE_IMAGE=${{ github.event.inputs.baseImage }}
+            BASE_TAG=${{ github.event.inputs.baseTag }}
