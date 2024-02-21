@@ -1,4 +1,3 @@
-# .github/workflows/release.yml
 name: Release Workflow
 
 on:
@@ -13,7 +12,9 @@ jobs:
       matrix:
         baseImage: ['nvcr.io/nvidia/tritonserver']
         baseTag: ['23.08']
-    uses: ./.github/workflows/build.yml
-    with:
-      baseImage: ${{ matrix.baseImage }}
-      baseTag: ${{ matrix.Tag}}
+    steps:
+      - name: Trigger Manually Triggered Build and Push Workflow
+        uses: ./.github/workflows/build.yml@main # Ensure this references the correct path and branch
+        with:
+          baseImage: ${{ matrix.baseImage }}
+          baseTag: ${{ matrix.baseTag }}
