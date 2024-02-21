@@ -1,7 +1,7 @@
 name: Manually Triggered Build and Push
 
 on:
-  workflow_dispatch:
+  workflow_call:
     inputs:
       baseImage:
         description: 'Base image (e.g., nvcr.io/nvidia/tritonserver)'
