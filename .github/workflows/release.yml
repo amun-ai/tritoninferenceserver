@@ -14,7 +14,7 @@ jobs:
         baseTag: ['23.08']
     steps:
       - name: Trigger Manually Triggered Build and Push Workflow
-        uses: ./.github/workflows/build.yml@main # Ensure this references the correct path and branch
+        uses: ./.github/workflows/build.yml # Ensure this references the correct path and branch
         with:
           baseImage: ${{ matrix.baseImage }}
           baseTag: ${{ matrix.baseTag }}
