@@ -7,7 +7,7 @@ FROM ${BASE_IMAGE}:${BASE_TAG}
 
 # Install additional packages. Adjust these commands based on what you need.
 RUN apt-get update && apt-get install -y \
-    your-package1 \
-    your-package2 \
+    libgl1-mesa-glx \
+    libstdc++6 \
     && rm -rf /var/lib/apt/lists/*
 
